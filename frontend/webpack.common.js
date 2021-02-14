@@ -4,6 +4,7 @@ const phaser = path.join(pathToPhaser, "dist/phaser.js");
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
   entry: "./src/game.ts",
@@ -51,6 +52,7 @@ module.exports = {
         }
       ],
     }),
+    new CleanWebpackPlugin(),
   ],
   resolve: {
     extensions: [".ts", ".js"],
