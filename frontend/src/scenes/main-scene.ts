@@ -1,7 +1,11 @@
 import { Redhat } from "../objects/redhat";
+import { Avatar } from "../objects/avatar";
+import { KeybordInputter } from "../utl/keybordInputter";
 
 export class MainScene extends Phaser.Scene {
   private myRedhat: Redhat;
+  private myAvatar: Avatar;
+  private keybordInputter: KeybordInputter;
 
   constructor() {
     super({ key: "MainScene" });
@@ -29,5 +33,21 @@ export class MainScene extends Phaser.Scene {
     });
 
     emitter.startFollow(this.myRedhat);
+
+    this.myAvatar = new Avatar({
+      scene: this,
+      x: 300,
+      y: 200,
+      texture: "redhat"
+    })
+    
+    this.keybordInputter = new KeybordInputter(this.input.keyboard.createCursorKeys());
+    this.myAvatar.setInputter(this.keybordInputter);
+  }
+
+  update(): void{
+    this.keybordInputter.update();
+    
+    this.myAvatar.updatePosition();
   }
 }
