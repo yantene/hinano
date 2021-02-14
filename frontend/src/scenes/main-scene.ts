@@ -18,14 +18,14 @@ export class MainScene extends Phaser.Scene {
     const emitter = particles.createEmitter({
       speed: 100,
       scale: { start: 0.5, end: 0 },
-      blendMode: "ADD"
+      blendMode: "ADD",
     });
 
     this.myRedhat = new Redhat({
       scene: this,
       x: 400,
       y: 300,
-      texture: "redhat"
+      texture: "redhat",
     });
 
     emitter.startFollow(this.myRedhat);
