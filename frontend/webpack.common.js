@@ -4,12 +4,15 @@ const phaser = path.join(pathToPhaser, "dist/phaser.js");
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
-  entry: "./src/game.ts",
+  entry: {
+    game: "./src/game.ts",
+  },
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js",
+    filename: "[name].[contenthash].js",
   },
   module: {
     rules: [
@@ -42,6 +45,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: "index.html",
       template: "./src/index.pug",
+      chunks: ["game"],
     }),
     new CopyPlugin({
       patterns: [
@@ -51,14 +55,8 @@ module.exports = {
         }
       ],
     }),
+    new CleanWebpackPlugin(),
   ],
-  devServer: {
-    contentBase: path.resolve(__dirname, "./"),
-    publicPath: "/dist/",
-    host: "127.0.0.1",
-    port: 8080,
-    open: true,
-  },
   resolve: {
     extensions: [".ts", ".js"],
     alias: {
