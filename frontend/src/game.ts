@@ -8,5 +8,6 @@ export class Game extends Phaser.Game {
 }
 
 window.addEventListener("load", () => {
+  // eslint-disable-next-line
   const game = new Game(GameConfig);
 });
