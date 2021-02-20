@@ -15,12 +15,12 @@ export class Avatar extends Phaser.GameObjects.Image {
     this.setScale(0.5);
   }
 
-  public setInputter(iInputter: IAvatarControlInputter){
+  public setInputter(iInputter: IAvatarControlInputter) {
     this.iInputter = iInputter;
   }
 
-  public updatePosition(){
-    if(this.iInputter == null){
+  public updatePosition() {
+    if (this.iInputter == null) {
       return;
     }
 

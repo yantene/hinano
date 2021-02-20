@@ -6,8 +6,8 @@
     "start": "webpack serve --config webpack.dev.js",
     "dev": "webpack --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
-    "eslint": "eslint 'src/**/*.ts'",
-    "eslint:fix": "eslint --fix 'src/**/*.ts'"
+    "eslint": "eslint src/**/*.ts",
+    "eslint:fix": "eslint --fix src/**/*.ts"
   },
   "keywords": [],
   "author": "@yantene, @cflatech and @sumogri",

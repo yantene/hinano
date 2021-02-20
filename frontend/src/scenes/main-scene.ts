@@ -38,16 +38,18 @@ export class MainScene extends Phaser.Scene {
       scene: this,
       x: 300,
       y: 200,
-      texture: "redhat"
-    })
-    
-    this.keybordInputter = new KeybordInputter(this.input.keyboard.createCursorKeys());
+      texture: "redhat",
+    });
+
+    this.keybordInputter = new KeybordInputter(
+      this.input.keyboard.createCursorKeys()
+    );
     this.myAvatar.setInputter(this.keybordInputter);
   }
 
-  update(): void{
+  update(): void {
     this.keybordInputter.update();
-    
+
     this.myAvatar.updatePosition();
   }
 }
