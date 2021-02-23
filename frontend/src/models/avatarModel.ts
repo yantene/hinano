@@ -6,15 +6,15 @@ import { AvatarData } from "./avatarData";
   オブジェクトとして存在するAvatarはこれを参照して動作する.
  */
 export class AvatarModel {
-  private iInputter : IAvatarControlInputter;
-  private data : AvatarData;
+  private iInputter: IAvatarControlInputter;
+  private data: AvatarData;
 
-  constructor(inputter : IAvatarControlInputter,data? : AvatarData) {
+  constructor(inputter: IAvatarControlInputter, data?: AvatarData) {
     this.iInputter = inputter;
     this.data = data;
   }
 
-  get IInputter() {
+  get IInputter(): IAvatarControlInputter {
     return this.iInputter;
   }
 
@@ -22,11 +22,11 @@ export class AvatarModel {
     this.iInputter = value;
   }
 
-  get Data(){
+  get Data(): AvatarData {
     return this.data;
   }
 
-  set Data(data : AvatarData){
+  set Data(data: AvatarData) {
     this.data = data;
   }
 
@@ -35,7 +35,7 @@ export class AvatarModel {
       return;
     }
 
-    this.iInputter.update(); //仮置き,Inputはゲームオブジェクトのupdateより先に呼ばれててほしい.
+    this.iInputter.update();
     this.data.x = this.iInputter.getPosX(this.data.x);
     this.data.y = this.iInputter.getPosY(this.data.y);
 

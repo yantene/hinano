@@ -1,6 +1,6 @@
 import { SpriteData } from "../../models/spriteData";
 
-export const AvatarSprite1 : SpriteData = {
+export const AvatarSprite1: SpriteData = {
   key: "AvatarSprite1",
   filePass: "./assets/textures/pipo-charachip001.png",
 

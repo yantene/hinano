@@ -1,5 +1,5 @@
 import { Avatar } from "../objects/avatar";
-import { AvatarSprite1 } from "../assets/configs/avatarSprite1"
+import { AvatarSprite1 } from "../assets/configs/avatarSprite1";
 
 export class MainScene extends Phaser.Scene {
   private myAvatar: Avatar;
@@ -9,14 +9,10 @@ export class MainScene extends Phaser.Scene {
   }
 
   preload(): void {
-    this.load.spritesheet(
-      AvatarSprite1.key,
-      AvatarSprite1.filePass,
-        {
-          frameWidth: AvatarSprite1.frameWidth,
-          frameHeight: AvatarSprite1.frameHeight
-        }
-    );
+    this.load.spritesheet(AvatarSprite1.key, AvatarSprite1.filePass, {
+      frameWidth: AvatarSprite1.frameWidth,
+      frameHeight: AvatarSprite1.frameHeight,
+    });
   }
 
   create(): void {

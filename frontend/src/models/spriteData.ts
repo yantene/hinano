@@ -6,10 +6,10 @@ export class SpriteData {
     Object.assign(this, init);
   }
 
-  key: string;         //スプライト名.
-  filePass: string;     //スプライトのパス.
+  key: string; //スプライト名.
+  filePass: string; //スプライトのパス.
 
-  frameWidth: number;   //フレーム幅.
-  frameHeight: number;  //フレーム高さ.
-  frameNo?: number;      //フレーム番号.
+  frameWidth: number; //フレーム幅.
+  frameHeight: number; //フレーム高さ.
+  frameNo?: number; //フレーム番号.
 }
