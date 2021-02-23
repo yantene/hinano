@@ -1,30 +1,40 @@
-import { IImageConstructor } from "../interfaces/image.interface";
-import { IAvatarControlInputter } from "../interfaces/inputter.interface";
+import { AvatarData } from "../models/avatarData";
+import { AvatarModel } from "../models/avatarModel";
+import { SpriteData } from "../models/spriteData";
+import { AvatarSprite1 } from "../assets/configs/avatarSprite1"
+import { KeybordInputter } from "../utl/keybordInputter";
 
-export class Avatar extends Phaser.GameObjects.Image {
-  private iInputter: IAvatarControlInputter;
+export class Avatar {
+  private model : AvatarModel;
+  private sprite : Phaser.GameObjects.Sprite;
 
-  constructor(aParams: IImageConstructor) {
-    super(aParams.scene, aParams.x, aParams.y, aParams.texture, aParams.frame);
+  constructor(scene : Phaser.Scene, model : AvatarModel ,spriteData : SpriteData) {
+    this.sprite = scene.add.sprite( spriteData.frameWidth,spriteData.frameHeight,spriteData.key,spriteData.frameNo );
+    scene.add.existing(this.sprite);
 
-    this.initSprite();
-    this.scene.add.existing(this);
+    this.model = model;
   }
 
-  private initSprite(): void {
-    this.setScale(0.5);
+  public update(): void {
+    this.model.updatePosition();
+
+    this.sprite.x = this.model.Data.x;
+    this.sprite.y = this.model.Data.y;
   }
 
-  public setInputter(iInputter: IAvatarControlInputter): void {
-    this.iInputter = iInputter;
-  }
+  /* このクライアントの持ち主のアバターをシーンに生成する. */
+  static InstantiateOwnPlayerAvatar(scene : Phaser.Scene): Avatar{
+    var keybordInputter = new KeybordInputter(
+      scene.input.keyboard.createCursorKeys()
+    );
+    
+    var avatarData = new AvatarData();
+    avatarData.x = 400;
+    avatarData.y = 300;
 
-  public updatePosition(): void {
-    if (this.iInputter == null) {
-      return;
-    }
+    var spriteData = new SpriteData(AvatarSprite1);
+    var avatarModel = new AvatarModel(keybordInputter,avatarData);
 
-    this.x = this.iInputter.getPosX(this.x);
-    this.y = this.iInputter.getPosY(this.y);
+    return new Avatar(scene,avatarModel,spriteData);
   }
 }
