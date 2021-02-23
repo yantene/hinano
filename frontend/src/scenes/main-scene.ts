@@ -1,33 +1,41 @@
-import { Redhat } from "../objects/redhat";
+import { Avatar } from "../objects/avatar";
+import { AvatarSprite1 } from "../assets/configs/avatarSprite1";
+import { AvatarSprite1Anims } from "../assets/configs/avatarSprite1";
 
 export class MainScene extends Phaser.Scene {
-  private myRedhat: Redhat;
+  private myAvatar: Avatar;
 
   constructor() {
     super({ key: "MainScene" });
   }
 
   preload(): void {
-    this.load.image("redhat", "./assets/redhat.png");
-    this.load.image("redParticle", "./assets/red.png");
+    this.load.spritesheet(AvatarSprite1.key, AvatarSprite1.filePass, {
+      frameWidth: AvatarSprite1.frameWidth,
+      frameHeight: AvatarSprite1.frameHeight,
+    });
   }
 
   create(): void {
-    const particles = this.add.particles("redParticle");
-
-    const emitter = particles.createEmitter({
-      speed: 100,
-      scale: { start: 0.5, end: 0 },
-      blendMode: "ADD",
+    AvatarSprite1Anims.forEach((element) => {
+      this.anims.create({
+        key: element.key,
+        frames: this.anims.generateFrameNumbers(element.targetSpriteKey, {
+          start: element.startFlameNo,
+          end: element.endFlameNo,
+        }),
+        frameRate: element.frameRate,
+        repeat: element.repeat,
+      });
     });
 
-    this.myRedhat = new Redhat({
-      scene: this,
-      x: 400,
-      y: 300,
-      texture: "redhat",
-    });
+    this.myAvatar = Avatar.InstantiateOwnPlayerAvatar(this);
+    this.cameras.main.startFollow(this.myAvatar.Sprite);
 
-    emitter.startFollow(this.myRedhat);
+    Avatar.InstantiateTestAvatar(this);
+  }
+
+  update(): void {
+    this.myAvatar.update();
   }
 }
