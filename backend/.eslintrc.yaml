@@ -21,3 +21,7 @@ extends:
   - plugin:@typescript-eslint/recommended
   - plugin:jest/recommended
   - prettier # ESLint と prettier の競合回避 (eslint-config-prettier)
+
+rules:
+  "@typescript-eslint/no-unused-vars": [1, { argsIgnorePattern: "^_" }]
+  "@typescript-eslint/no-explicit-any": 0

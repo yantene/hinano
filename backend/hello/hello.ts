@@ -1,8 +1,7 @@
 export class Hello {
-  constructor (public name: string) {
-  }
+  constructor(public name: string) {}
 
-  greet () {
+  greet(): string {
     return `Hello, ${this.name}!`;
   }
 }
