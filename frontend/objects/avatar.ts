@@ -2,8 +2,8 @@ import { AvatarData } from "../models/avatarData";
 import { AvatarModel } from "../models/avatarModel";
 import { SpriteData } from "../models/spriteData";
 import { AnimData } from "../models/animData";
-import { AvatarSprite1 } from "../assets/configs/avatarSprite1";
-import { AvatarSprite1Anims } from "../assets/configs/avatarSprite1";
+import { AvatarSprite1 } from "../configs/avatarSprite1";
+import { AvatarSprite1Anims } from "../configs/avatarSprite1";
 import { KeybordInputter } from "../utl/keybordInputter";
 
 export class Avatar {

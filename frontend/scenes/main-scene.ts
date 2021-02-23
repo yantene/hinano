@@ -1,6 +1,6 @@
 import { Avatar } from "../objects/avatar";
-import { AvatarSprite1 } from "../assets/configs/avatarSprite1";
-import { AvatarSprite1Anims } from "../assets/configs/avatarSprite1";
+import { AvatarSprite1 } from "../configs/avatarSprite1";
+import { AvatarSprite1Anims } from "../configs/avatarSprite1";
 
 export class MainScene extends Phaser.Scene {
   private myAvatar: Avatar;

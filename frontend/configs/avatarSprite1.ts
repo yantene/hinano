@@ -2,8 +2,8 @@
  * ぴぽやのキャラスプライトの設定定数定義.
  */
 
-import { SpriteData } from "../../models/spriteData";
-import { AnimData } from "../../models/animData";
+import { SpriteData } from "../models/spriteData";
+import { AnimData } from "../models/animData";
 
 export const AvatarSprite1: SpriteData = {
   key: "AvatarSprite1",

@@ -1,12 +1,17 @@
 {
   "compilerOptions": {
-    "target": "ES6",
+    "incremental": true,
+    "target": "es2015",
     "module": "commonjs",
     "moduleResolution": "node",
-    "sourceMap": false,
-    "noImplicitAny": true,
-    "strict": false
+
+    "strict": false,
+
+    "esModuleInterop": true,
+
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
   },
-  "include": ["src/**/*"],
+  "include": ["**/*"],
   "exclude": ["node_modules", "**/*.spec.ts"]
 }
