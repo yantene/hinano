@@ -1,5 +1,6 @@
 import { Avatar } from "../objects/avatar";
 import { AvatarSprite1 } from "../assets/configs/avatarSprite1";
+import { AvatarSprite1Anims } from "../assets/configs/avatarSprite1";
 
 export class MainScene extends Phaser.Scene {
   private myAvatar: Avatar;
@@ -16,7 +17,22 @@ export class MainScene extends Phaser.Scene {
   }
 
   create(): void {
+    AvatarSprite1Anims.forEach((element) => {
+      this.anims.create({
+        key: element.key,
+        frames: this.anims.generateFrameNumbers(element.targetSpriteKey, {
+          start: element.startFlameNo,
+          end: element.endFlameNo,
+        }),
+        frameRate: element.frameRate,
+        repeat: element.repeat,
+      });
+    });
+
     this.myAvatar = Avatar.InstantiateOwnPlayerAvatar(this);
+    this.cameras.main.startFollow(this.myAvatar.Sprite);
+
+    Avatar.InstantiateTestAvatar(this);
   }
 
   update(): void {

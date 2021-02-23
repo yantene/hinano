@@ -6,7 +6,7 @@ import { AvatarData } from "./avatarData";
   オブジェクトとして存在するAvatarはこれを参照して動作する.
  */
 export class AvatarModel {
-  private iInputter: IAvatarControlInputter;
+  private iInputter?: IAvatarControlInputter;
   private data: AvatarData;
 
   constructor(inputter: IAvatarControlInputter, data?: AvatarData) {
@@ -31,7 +31,7 @@ export class AvatarModel {
   }
 
   public updatePosition(): void {
-    if (this.data == null) {
+    if (this.data == null || this.iInputter == null) {
       return;
     }
 
