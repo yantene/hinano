@@ -3,8 +3,9 @@
     "incremental": true,
     "target": "es2015",
     "module": "commonjs",
+    "moduleResolution": "node",
 
-    "strict": true,
+    "strict": false,
 
     "esModuleInterop": true,
 
@@ -12,5 +13,7 @@
     "forceConsistentCasingInFileNames": true,
 
     "outDir": "./dist"
-  }
+  },
+  "include": ["**/*"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
 }

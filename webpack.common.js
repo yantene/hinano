@@ -8,17 +8,17 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
   entry: {
-    game: "./src/game.ts",
+    game: "./public/game.ts",
   },
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, "dist/public"),
     filename: "[name].[contenthash].js",
   },
   module: {
     rules: [
       {
         test: /\.ts$/,
-        include: path.resolve(__dirname, "src"),
+        include: path.resolve(__dirname, "public"),
         loader: "ts-loader",
       },
       {
@@ -28,13 +28,13 @@ module.exports = {
       },
       {
         test: /\.pug$/,
-        include: path.resolve(__dirname, "src"),
+        include: path.resolve(__dirname, "public"),
         use: [
           {
             loader: "pug-loader",
             options: {
               pretty: true,
-              root: path.resolve(__dirname, "src"),
+              root: __dirname,
             },
           },
         ],
@@ -44,13 +44,13 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       filename: "index.html",
-      template: "./src/index.pug",
+      template: "./public/index.pug",
       chunks: ["game"],
     }),
     new CopyPlugin({
       patterns: [
         {
-          from: "./src/assets",
+          from: "./public/assets",
           to: "./assets",
         }
       ],
