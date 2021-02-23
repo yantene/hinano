@@ -1,0 +1,27 @@
+---
+root: true
+
+env:
+  es6: true
+  browser: true
+  jest/globals: true
+
+parser: "@typescript-eslint/parser"
+
+parserOptions:
+  project: ./frontend/tsconfig.eslint.json
+
+plugins:
+  - jest
+  - "@typescript-eslint"
+
+extends:
+  - eslint:recommended
+  - plugin:@typescript-eslint/eslint-recommended
+  - plugin:@typescript-eslint/recommended
+  - plugin:jest/recommended
+  - prettier # ESLint と prettier の競合回避 (eslint-config-prettier)
+
+rules:
+  "@typescript-eslint/no-unused-vars": [1, { argsIgnorePattern: "^_" }]
+  "@typescript-eslint/no-explicit-any": 0

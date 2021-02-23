@@ -7,13 +7,30 @@
   "license": "MIT",
   "scripts": {
     "start": "node ./bin/www",
-    "front:dev": "webpack --config webpack.dev.js",
-    "front:build": "webpack --config webpack.prod.js",
-    "back:dev": "rm -rf dist && set DEBUG=express-typescript:* & tsc-watch --noClear --onSuccess \"node ./bin/www\"",
-    "back:build": "tsc",
-    "test": "jest",
-    "lint": "eslint './**/*.ts'",
-    "lint:fix": "eslint --fix './**/*.ts' && prettier --write './**/*.ts'"
+
+    "build": "npm run build:front && npm run build:back",
+    "build:front": "webpack --config ./frontend/webpack.prod.js",
+    "build:back": "tsc --build ./backend/tsconfig.json",
+
+    "dev": "npm run dev:front & npm run dev:back",
+    "dev:front": "webpack --watch --config ./frontend/webpack.dev.js",
+    "dev:back": "rm -rf ./dist/app && set DEBUG=express-typescript:* & tsc-watch --build ./backend/tsconfig.json --noClear --onSuccess \"npm start\"",
+
+    "lint": "npm run lint:front && npm run lint:back",
+    "lint:front": "eslint --config ./frontend/.eslintrc.yaml \"./frontend/**/*.ts\"",
+    "lint:back": "eslint --config ./backend/.eslintrc.yaml \"./backend/**/*.ts\"",
+
+    "lint:fix": "npm run lint:fix:front && npm run lint:fix:back",
+    "lint:fix:front": "npm run lint:fix:front:eslint && npm run lint:fix:front:prettier",
+    "lint:fix:front:eslint": "eslint --config ./frontend/.eslintrc.yaml --fix \"./frontend/**/*.ts\"",
+    "lint:fix:front:prettier": "prettier --write \"./frontend/**/*.ts\"",
+    "lint:fix:back": "npm run lint:fix:back:eslint && npm run lint:fix:back:prettier",
+    "lint:fix:back:eslint": "eslint --config ./backend/.eslintrc.yaml --fix \"./backend/**/*.ts\"",
+    "lint:fix:back:prettier": "prettier --write \"./backend/**/*.ts\"",
+
+    "test": "npm run test:front && npm run test:back",
+    "test:front": "jest --config ./frontend/jest.config.js",
+    "test:back": "jest --config ./backend/jest.config.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

@@ -4,13 +4,12 @@ root: true
 env:
   es6: true
   node: true
-  browser: true
   jest/globals: true
 
 parser: "@typescript-eslint/parser"
 
 parserOptions:
-  project: ./tsconfig.json
+  project: ./backend/tsconfig.eslint.json
 
 plugins:
   - jest
