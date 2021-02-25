@@ -14,6 +14,10 @@ export class MainScene extends Phaser.Scene {
       frameWidth: AvatarSprite1.frameWidth,
       frameHeight: AvatarSprite1.frameHeight,
     });
+
+    //タイルマップの読み込み.
+    this.load.tilemapTiledJSON("map", "assets/tilemaps/demoMap/demo.json");
+    this.load.image("tileset", "assets/tilemaps/demoMap/pipoya_mapchip.png");
   }
 
   create(): void {
@@ -28,6 +32,13 @@ export class MainScene extends Phaser.Scene {
         repeat: element.repeat,
       });
     });
+
+    //タイルマップの読み込み.
+    const map = this.make.tilemap({ key: "map" });
+    const tiles = map.addTilesetImage("pipoya_mapchip", "tileset");
+    //レイヤーのロード.
+    const layer1 = map.createLayer("ground", tiles); // eslint-disable-line
+    const layer2 = map.createLayer("objects", tiles); // eslint-disable-line
 
     this.myAvatar = Avatar.InstantiateOwnPlayerAvatar(this);
     this.cameras.main.startFollow(this.myAvatar.Sprite);
