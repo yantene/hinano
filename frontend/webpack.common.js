@@ -4,11 +4,13 @@ const phaser = path.join(pathToPhaser, "dist/phaser.js");
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
   entry: {
     game: path.resolve(__dirname, "./game.ts"),
+    style: path.resolve(__dirname, "./style.sass"),
   },
   output: {
     path: path.resolve(__dirname, "../dist/public"),
@@ -39,6 +41,28 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.sass$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
+          {
+            loader: "css-loader",
+            options: {
+              url: false,
+              sourceMap: true,
+              importLoaders: 2, // postcss-loader, sass-loader
+            },
+          },
+          {
+            loader: "sass-loader",
+            options: {
+              sourceMap: true,
+            },
+          },
+        ],
+      },
     ],
   },
   plugins: [
@@ -54,6 +78,9 @@ module.exports = {
           to: "./assets",
         }
       ],
+    }),
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
     }),
     new CleanWebpackPlugin(),
   ],

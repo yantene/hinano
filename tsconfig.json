@@ -12,7 +12,9 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
 
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "rootDir": "./"
   },
-  "exclude": ["**/*.spec.ts", "frontend/**/*"]
+  "include": ["./server.ts", "./server.spec.ts", "./app/**/*"],
+  "exclude": ["./**/*.spec.ts"]
 }

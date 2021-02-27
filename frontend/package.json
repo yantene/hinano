@@ -14,11 +14,9 @@
     }
   ],
   "scripts": {
-    "start": "npm run dev:serve",
     "build": "webpack --config ./webpack.prod.js",
     "dev": "webpack --config ./webpack.dev.js",
     "dev:watch": "webpack --watch --config ./webpack.dev.js",
-    "dev:serve": "webpack serve --config ./webpack.dev.js",
     "lint": "eslint --config ./.eslintrc.yaml \"./**/*.ts\"",
     "format": "run-s format:*",
     "format:eslint": "eslint --config ./.eslintrc.yaml --fix \"./**/*.ts\"",
