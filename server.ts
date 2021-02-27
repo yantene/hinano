@@ -5,7 +5,6 @@ const debug = Debug("siggre:server");
 
 import http from "http";
 
-
 /* Get port from environment and store in Express. */
 const port = normalizePort(process.env.PORT || "3000");
 app.set("port", port);
@@ -43,22 +42,27 @@ function onError(error: NodeJS.ErrnoException): void {
 
   switch (error.code) {
     case "EACCES":
-      console.error([
-        typeof port === "string" ? "Pipe" : "Port",
-        port,
-        "requires elevated privileges",
-      ].join(" "));
-      process.exit(1);
+      console.error(
+        [
+          typeof port === "string" ? "Pipe" : "Port",
+          port,
+          "requires elevated privileges",
+        ].join(" ")
+      );
+      break;
     case "EADDRINUSE":
-      console.error([
-        typeof port === "string" ? "Pipe" : "Port",
-        port,
-        "is already in use",
-      ].join(" "));
-      process.exit(1);
+      console.error(
+        [
+          typeof port === "string" ? "Pipe" : "Port",
+          port,
+          "is already in use",
+        ].join(" ")
+      );
+      break;
     default:
       throw error;
   }
+  process.exit(1);
 }
 
 /* Event listener for HTTP server "listening" event. */
