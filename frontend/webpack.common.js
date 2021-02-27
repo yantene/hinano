@@ -44,13 +44,13 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       filename: "index.html",
-      template: "./frontend/index.pug",
+      template: "./index.pug",
       chunks: ["game"],
     }),
     new CopyPlugin({
       patterns: [
         {
-          from: "./frontend/assets",
+          from: "./assets",
           to: "./assets",
         }
       ],

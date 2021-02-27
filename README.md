@@ -1,56 +1,52 @@
-# uchiwa
+# siggre
 
-## development
+## 開発
 
-### build
+### 環境構築
+
+依存パッケージをインストール。
+
+```bash
+npm ci
+```
+
+### Build
+
+フロントエンドおよびバックエンドをビルドし、
+`/dist` 下に出力する。
 
 ```bash
 npm run build
 ```
 
-`frontend/` および `backend/` をビルドし、
-`dist/` 下に成果物を出力します。
-
-### start
-
-```bash
-npm start
-```
-
-`dist/` 下に出力した成果物を実行します。
-
-### dev
+### 開発用サーバの起動
 
 ```bash
 npm run dev
 ```
 
-ファイルの変更を検知しながら都度ファイルをビルドし、
-`http://localhost:3000` で表示します。
-オートリロードはしないので適宜手動でリロードしてください。
+開発用のサーバを起動する。
+フロントエンドおよびバックエンドのソースコードの変更を検知して、
+自動でビルドし直される。
 
-### lint
+### Lint & Format
+
+フロントエンドおよびバックエンドに対する eslint は以下で実行する。
+PR 作成前は必ず実行および指摘事項を修正すること。
 
 ```bash
 npm run lint
 ```
 
-ファイルを lint します。
-コミット前に必ず実行してください。
-
-### lint:fix
+フロントエンドおよびバックエンドに対する
+eslint の fix および prettier の実行は以下で実行する。
 
 ```bash
-npm run lint:fix
+npm run format
 ```
 
-ファイルを自動修正およびフォーマットします。
-
-### test
+### Test
 
 ```bash
 npm test
 ```
-
-テストを実行します。
-コミット前に必ず実行してください。

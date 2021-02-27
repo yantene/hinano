@@ -9,7 +9,7 @@ env:
 parser: "@typescript-eslint/parser"
 
 parserOptions:
-  project: ./backend/tsconfig.eslint.json
+  project: ./tsconfig.eslint.json
 
 plugins:
   - jest
