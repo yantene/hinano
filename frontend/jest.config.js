@@ -9,7 +9,7 @@ module.exports = {
   },
   globals: {
     "ts-jest": {
-      "tsconfig": "./frontend/tsconfig.json",
+      "tsconfig": "./tsconfig.json",
     },
   },
   testPathIgnorePatterns: [

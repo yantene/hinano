@@ -1,8 +1,8 @@
 import { MainScene } from "./scenes/main-scene";
 
 export const GameConfig: Phaser.Types.Core.GameConfig = {
-  title: "uchiwa",
-  url: "https://github.com/yantene/uchiwa",
+  title: "siggre",
+  url: "https://github.com/yantene/siggre",
   version: "0.1.0",
   width: 800,
   height: 600,
