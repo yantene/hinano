@@ -8,7 +8,7 @@ import logger from "morgan";
 import { router as indexRouter } from "./routes/index";
 import { router as usersRouter } from "./routes/users";
 
-const app = express();
+export const app = express();
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
@@ -37,5 +37,3 @@ app.use((err: any, req: Request, res: Response, _next: NextFunction) => {
   res.status(err.status || 500);
   res.render("error");
 });
-
-module.exports = app;
