@@ -4,7 +4,7 @@ import { SpriteData } from "../models/spriteData";
 import { AnimData } from "../models/animData";
 import { AvatarSprite1 } from "../configs/avatarSprite1";
 import { AvatarSprite1Anims } from "../configs/avatarSprite1";
-import { KeybordInputter } from "../utl/keybordInputter";
+import { KeybordAvatarControlInputter } from "../utl/keybordAvatarControlInputter";
 
 export class Avatar {
   private model: AvatarModel;
@@ -17,7 +17,7 @@ export class Avatar {
     spriteData: SpriteData,
     anims?: AnimData[]
   ) {
-    this.sprite = scene.add.sprite(
+    this.sprite = scene.physics.add.sprite(
       spriteData.frameWidth,
       spriteData.frameHeight,
       spriteData.key,
@@ -68,9 +68,7 @@ export class Avatar {
 
   /* このクライアントの持ち主のアバターをシーンに生成する. */
   static InstantiateOwnPlayerAvatar(scene: Phaser.Scene): Avatar {
-    const keybordInputter = new KeybordInputter(
-      scene.input.keyboard.createCursorKeys()
-    );
+    const keybordInputter = new KeybordAvatarControlInputter();
 
     const avatarData = new AvatarData();
     avatarData.x = 400;

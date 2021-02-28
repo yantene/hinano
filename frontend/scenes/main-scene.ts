@@ -1,6 +1,7 @@
 import { Avatar } from "../objects/avatar";
 import { AvatarSprite1 } from "../configs/avatarSprite1";
 import { AvatarSprite1Anims } from "../configs/avatarSprite1";
+import { KeybordInput } from "../utl/keybordInput";
 
 export class MainScene extends Phaser.Scene {
   private myAvatar: Avatar;
@@ -33,20 +34,27 @@ export class MainScene extends Phaser.Scene {
       });
     });
 
+    //キーコンフィグ設定.
+    KeybordInput.Instantiate(this);
+
     //タイルマップの読み込み.
     const map = this.make.tilemap({ key: "map" });
     const tiles = map.addTilesetImage("pipoya_mapchip", "tileset");
     //レイヤーのロード.
     const layer1 = map.createLayer("ground", tiles); // eslint-disable-line
     const layer2 = map.createLayer("objects", tiles); // eslint-disable-line
+    layer2.setCollisionByExclusion([-1], true);
 
     this.myAvatar = Avatar.InstantiateOwnPlayerAvatar(this);
     this.cameras.main.startFollow(this.myAvatar.Sprite);
+
+    this.physics.add.collider(this.myAvatar.Sprite, layer2);
 
     Avatar.InstantiateTestAvatar(this);
   }
 
   update(): void {
+    KeybordInput.Instance.Update();
     this.myAvatar.update();
   }
 }

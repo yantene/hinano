@@ -36,8 +36,16 @@ export class AvatarModel {
     }
 
     this.iInputter.update();
-    this.data.x = this.iInputter.getPosX(this.data.x);
-    this.data.y = this.iInputter.getPosY(this.data.y);
+
+    if (this.IInputter.getPositionUpdateMode() == "Direct") {
+      this.data.x = this.iInputter.getPosX(this.data.x);
+      this.data.y = this.iInputter.getPosY(this.data.y);
+    } else {
+      this.data.velocityX = this.IInputter.getVelocityX(this.data.velocityX);
+      this.data.velocityY = this.IInputter.getVelocityY(this.data.velocityY);
+    }
+
+    this.data.rotation = this.IInputter.getRotation();
 
     return;
   }
