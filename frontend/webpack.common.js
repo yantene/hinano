@@ -1,5 +1,5 @@
 const path = require("path");
-const pathToPhaser = path.join(__dirname, "../node_modules/phaser/");
+const pathToPhaser = path.join(__dirname, "./node_modules/phaser/");
 const phaser = path.join(pathToPhaser, "dist/phaser.js");
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
