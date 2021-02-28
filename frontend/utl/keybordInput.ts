@@ -50,7 +50,9 @@ export class KeyInput {
 
   public Update(): void {
     this.preDown = this.nowDown;
-    this.nowDown = this.keyList.reduce((acc, x) => acc || x.isDown, false);
+    this.nowDown = this.keyList
+      .reduce((acc, x) => acc || x.isDown, false)
+      .valueOf();
 
     if (this.nowDown == true && this.preDown == false) {
       this.keyDownFirst = true;
@@ -79,6 +81,9 @@ export class KeyInput {
  */
 export class KeyInputData {
   constructor(init?: Partial<KeyInputData>) {
+    this.keycodeList = [];
+    this.inputType = "down";
+
     Object.assign(this, init);
   }
 

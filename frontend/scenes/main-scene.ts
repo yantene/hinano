@@ -4,7 +4,7 @@ import { AvatarSprite1Anims } from "../configs/avatarSprite1";
 import { KeybordInput } from "../utl/keybordInput";
 
 export class MainScene extends Phaser.Scene {
-  private myAvatar: Avatar;
+  private myAvatar?: Avatar;
 
   constructor() {
     super({ key: "MainScene" });
@@ -55,6 +55,6 @@ export class MainScene extends Phaser.Scene {
 
   update(): void {
     KeybordInput.Instance.Update();
-    this.myAvatar.update();
+    this.myAvatar?.update();
   }
 }

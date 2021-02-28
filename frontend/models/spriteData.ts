@@ -3,6 +3,11 @@
 */
 export class SpriteData {
   constructor(init?: Partial<SpriteData>) {
+    this.key = "";
+    this.filePass = "";
+    this.frameWidth = 0;
+    this.frameHeight = 0;
+
     Object.assign(this, init);
   }
 

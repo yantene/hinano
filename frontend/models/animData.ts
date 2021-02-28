@@ -4,6 +4,13 @@
 */
 export class AnimData {
   constructor(init?: Partial<AnimData>) {
+    this.key = "";
+    this.targetSpriteKey = "";
+    this.startFlameNo = 0;
+    this.endFlameNo = 0;
+    this.frameRate = 0;
+    this.repeat = 0;
+
     Object.assign(this, init);
   }
 

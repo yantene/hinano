@@ -35,18 +35,18 @@ export class KeybordAvatarControlInputter implements IAvatarControlInputter {
     this.velocityX = 0;
     this.velocityY = 0;
 
-    if (KeybordInput.Instance.Keys.get("left").IsKeysDown) {
+    if (KeybordInput.Instance.Keys.get("left")?.IsKeysDown) {
       this.addXPos = -10;
       this.velocityX = -100;
-    } else if (KeybordInput.Instance.Keys.get("right").IsKeysDown) {
+    } else if (KeybordInput.Instance.Keys.get("right")?.IsKeysDown) {
       this.addXPos = 10;
       this.velocityX = 100;
     }
 
-    if (KeybordInput.Instance.Keys.get("up").IsKeysDown) {
+    if (KeybordInput.Instance.Keys.get("up")?.IsKeysDown) {
       this.addYPos = -10;
       this.velocityY = -100;
-    } else if (KeybordInput.Instance.Keys.get("down").IsKeysDown) {
+    } else if (KeybordInput.Instance.Keys.get("down")?.IsKeysDown) {
       this.addYPos = 10;
       this.velocityY = 100;
     }

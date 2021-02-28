@@ -87,7 +87,7 @@ export class Avatar {
     avatarData.y = 300;
 
     const spriteData = new SpriteData(AvatarSprite1);
-    const avatarModel = new AvatarModel(null, avatarData);
+    const avatarModel = new AvatarModel(undefined, avatarData);
 
     return new Avatar(scene, avatarModel, spriteData);
   }
