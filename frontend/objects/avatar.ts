@@ -4,11 +4,11 @@ import { SpriteData } from "../models/spriteData";
 import { AnimData } from "../models/animData";
 import { AvatarSprite1 } from "../configs/avatarSprite1";
 import { AvatarSprite1Anims } from "../configs/avatarSprite1";
-import { KeybordInputter } from "../utl/keybordInputter";
+import { KeybordAvatarControlInputter } from "../utl/keybordAvatarControlInputter";
 
 export class Avatar {
   private model: AvatarModel;
-  private sprite: Phaser.GameObjects.Sprite;
+  private sprite: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
   private anims?: AnimData[];
 
   constructor(
@@ -17,7 +17,7 @@ export class Avatar {
     spriteData: SpriteData,
     anims?: AnimData[]
   ) {
-    this.sprite = scene.add.sprite(
+    this.sprite = scene.physics.add.sprite(
       spriteData.frameWidth,
       spriteData.frameHeight,
       spriteData.key,
@@ -38,8 +38,21 @@ export class Avatar {
   }
 
   private SpriteUpdate(oldX: number, oldY: number): void {
-    this.sprite.x = this.model.Data.x;
-    this.sprite.y = this.model.Data.y;
+    //直値指定モード.
+    if (this.model.GetPositionUpdateMode == "Direct") {
+      //モデルの位置をスプライトへ反映.
+      this.sprite.x = this.model.Data.x;
+      this.sprite.y = this.model.Data.y;
+    }
+    //速度指定モード
+    else if (this.model.GetPositionUpdateMode == "Velocity") {
+      //スプライトの位置をモデルへ反映.
+      this.model.Data.x = this.sprite.x;
+      this.model.Data.y = this.sprite.y;
+      //速度設定.
+      this.sprite.body.setVelocityX(this.model.Data.velocityX);
+      this.sprite.body.setVelocityY(this.model.Data.velocityY);
+    }
 
     //アニメが設定されているなら、上下左右移動でplay.
     if (this.anims != null) {
@@ -68,9 +81,7 @@ export class Avatar {
 
   /* このクライアントの持ち主のアバターをシーンに生成する. */
   static InstantiateOwnPlayerAvatar(scene: Phaser.Scene): Avatar {
-    const keybordInputter = new KeybordInputter(
-      scene.input.keyboard.createCursorKeys()
-    );
+    const keybordInputter = new KeybordAvatarControlInputter();
 
     const avatarData = new AvatarData();
     avatarData.x = 400;
@@ -89,7 +100,7 @@ export class Avatar {
     avatarData.y = 300;
 
     const spriteData = new SpriteData(AvatarSprite1);
-    const avatarModel = new AvatarModel(null, avatarData);
+    const avatarModel = new AvatarModel(undefined, avatarData);
 
     return new Avatar(scene, avatarModel, spriteData);
   }

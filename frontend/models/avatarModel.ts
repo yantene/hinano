@@ -1,4 +1,7 @@
-import { IAvatarControlInputter } from "../interfaces/inputter.interface";
+import {
+  AvatarControlPositionUpdateMode,
+  IAvatarControlInputter,
+} from "../interfaces/inputter.interface";
 import { AvatarData } from "./avatarData";
 
 /*
@@ -9,16 +12,22 @@ export class AvatarModel {
   private iInputter?: IAvatarControlInputter;
   private data: AvatarData;
 
-  constructor(inputter: IAvatarControlInputter, data?: AvatarData) {
+  constructor(inputter?: IAvatarControlInputter, data?: AvatarData) {
     this.iInputter = inputter;
-    this.data = data;
+
+    //空データが飛んで来たら、デフォで作成.
+    if (data == undefined) {
+      this.data = new AvatarData({});
+    } else {
+      this.data = data;
+    }
   }
 
-  get IInputter(): IAvatarControlInputter {
+  get IInputter(): IAvatarControlInputter | undefined {
     return this.iInputter;
   }
 
-  set IInputter(value: IAvatarControlInputter) {
+  set IInputter(value: IAvatarControlInputter | undefined) {
     this.iInputter = value;
   }
 
@@ -31,14 +40,25 @@ export class AvatarModel {
   }
 
   public updatePosition(): void {
-    if (this.data == null || this.iInputter == null) {
+    if (this.data === null || this.IInputter === undefined) {
       return;
     }
 
-    this.iInputter.update();
-    this.data.x = this.iInputter.getPosX(this.data.x);
-    this.data.y = this.iInputter.getPosY(this.data.y);
+    this.IInputter.update();
+    if (this.IInputter.getPositionUpdateMode() == "Direct") {
+      this.data.x = this.IInputter.getPosX(this.data.x);
+      this.data.y = this.IInputter.getPosY(this.data.y);
+    } else {
+      this.data.velocityX = this.IInputter.getVelocityX(this.data.velocityX);
+      this.data.velocityY = this.IInputter.getVelocityY(this.data.velocityY);
+    }
+
+    this.data.rotation = this.IInputter.getRotation();
 
     return;
+  }
+
+  get GetPositionUpdateMode(): AvatarControlPositionUpdateMode | undefined {
+    return this.iInputter?.getPositionUpdateMode();
   }
 }
