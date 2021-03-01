@@ -8,7 +8,7 @@ import { KeybordAvatarControlInputter } from "../utl/keybordAvatarControlInputte
 
 export class Avatar {
   private model: AvatarModel;
-  private sprite: Phaser.GameObjects.Sprite;
+  private sprite: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
   private anims?: AnimData[];
 
   constructor(
@@ -38,8 +38,21 @@ export class Avatar {
   }
 
   private SpriteUpdate(oldX: number, oldY: number): void {
-    this.sprite.x = this.model.Data.x;
-    this.sprite.y = this.model.Data.y;
+    //直値指定モード.
+    if (this.model.GetPositionUpdateMode == "Direct") {
+      //モデルの位置をスプライトへ反映.
+      this.sprite.x = this.model.Data.x;
+      this.sprite.y = this.model.Data.y;
+    }
+    //速度指定モード
+    else if (this.model.GetPositionUpdateMode == "Velocity") {
+      //スプライトの位置をモデルへ反映.
+      this.model.Data.x = this.sprite.x;
+      this.model.Data.y = this.sprite.y;
+      //速度設定.
+      this.sprite.body.setVelocityX(this.model.Data.velocityX);
+      this.sprite.body.setVelocityY(this.model.Data.velocityY);
+    }
 
     //アニメが設定されているなら、上下左右移動でplay.
     if (this.anims != null) {

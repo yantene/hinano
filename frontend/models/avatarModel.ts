@@ -1,4 +1,7 @@
-import { IAvatarControlInputter } from "../interfaces/inputter.interface";
+import {
+  AvatarControlPositionUpdateMode,
+  IAvatarControlInputter,
+} from "../interfaces/inputter.interface";
 import { AvatarData } from "./avatarData";
 
 /*
@@ -53,5 +56,9 @@ export class AvatarModel {
     this.data.rotation = this.IInputter.getRotation();
 
     return;
+  }
+
+  get GetPositionUpdateMode(): AvatarControlPositionUpdateMode | undefined {
+    return this.iInputter?.getPositionUpdateMode();
   }
 }

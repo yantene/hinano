@@ -16,7 +16,7 @@ export class KeybordAvatarControlInputter implements IAvatarControlInputter {
   private rotation = 0;
 
   public getPositionUpdateMode(): AvatarControlPositionUpdateMode {
-    return "Direct"; //デバッグ.とりあえずtransformで動かす.
+    return "Velocity";
   }
   public getVelocityX(_oldx: number): number {
     return this.velocityX;
@@ -30,25 +30,28 @@ export class KeybordAvatarControlInputter implements IAvatarControlInputter {
   }
 
   public update(): void {
+    const velocityScale = 500;
+    const directScale = 10;
+
     this.addXPos = 0;
     this.addYPos = 0;
     this.velocityX = 0;
     this.velocityY = 0;
 
     if (KeybordInput.Instance.Keys.get("left")?.IsKeysDown) {
-      this.addXPos = -10;
-      this.velocityX = -100;
+      this.addXPos = -directScale;
+      this.velocityX = -velocityScale;
     } else if (KeybordInput.Instance.Keys.get("right")?.IsKeysDown) {
-      this.addXPos = 10;
-      this.velocityX = 100;
+      this.addXPos = directScale;
+      this.velocityX = velocityScale;
     }
 
     if (KeybordInput.Instance.Keys.get("up")?.IsKeysDown) {
-      this.addYPos = -10;
-      this.velocityY = -100;
+      this.addYPos = -directScale;
+      this.velocityY = -velocityScale;
     } else if (KeybordInput.Instance.Keys.get("down")?.IsKeysDown) {
-      this.addYPos = 10;
-      this.velocityY = 100;
+      this.addYPos = directScale;
+      this.velocityY = velocityScale;
     }
   }
 
