@@ -1,14 +1,22 @@
 version: "3.9"
 services:
-  siggre:
-    image: yantene/siggre
+  hinano:
+    image: yantene/hinano
     build:
       context: .
-      dockerfile: ./Dockerfile
-    ports:
-      - target: 3000
-        published: ${PORT_DEV:-3000}
-        protocol: tcp
+      dockerfile: ./docker/hinano/Dockerfile
     command: ["run", "dev"]
     volumes:
       - .:/usr/src/app
+   
+  nginx:
+    image: nginx
+    ports:
+      - target: 443
+        published: ${PORT_DEV:-443}
+        protocol: tcp
+    volumes:
+      - "./docker/nginx/conf.d/:/etc/nginx/conf.d"
+      - "./docker/nginx/tls:/etc/pki/tls"
+    depends_on:
+      - hinano
