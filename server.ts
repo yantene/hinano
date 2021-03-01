@@ -1,7 +1,7 @@
 import { app } from "./app/app";
 
 import Debug from "debug";
-const debug = Debug("siggre:server");
+const debug = Debug("hinano:server");
 
 import http from "http";
 
