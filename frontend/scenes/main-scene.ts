@@ -42,7 +42,9 @@ export class MainScene extends Phaser.Scene {
     const tiles = map.addTilesetImage("pipoya_mapchip", "tileset");
     //レイヤーのロード.
     const layer1 = map.createLayer("ground", tiles); // eslint-disable-line
-    const layer2 = map.createLayer("objects", tiles); // eslint-disable-line
+    const layer2 = map.createLayer("collidion", tiles); // eslint-disable-line
+    const layer3 = map.createLayer("highPlace", tiles); // eslint-disable-line
+    layer3.depth = 99;  //高所レイヤーは手前側に表示.
     layer2.setCollisionByExclusion([-1], true);
 
     this.myAvatar = Avatar.InstantiateOwnPlayerAvatar(this);
